@@ -1,0 +1,4 @@
+Flask==2.3.2
+openai==1.13.3
+slack_sdk==3.26.2
+gunicorn==21.2.0
