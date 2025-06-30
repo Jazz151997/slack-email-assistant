@@ -3,6 +3,11 @@ from slack_sdk import WebClient
 import openai
 import os
 
+os.environ.pop("HTTP_PROXY", None)
+os.environ.pop("HTTPS_PROXY", None)
+os.environ.pop("OPENAI_PROXY", None)
+
+
 app = Flask(__name__)
 
 client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
