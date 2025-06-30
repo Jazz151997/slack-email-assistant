@@ -23,15 +23,15 @@ def handle_slack_event():
             f"{user_input}"
         )
 
-        response = openai.ChatCompletion.create(
-    model="gpt-4",
-    messages=[
-        {"role": "system", "content": prompt}
-    ],
-    max_tokens=300,
-    temperature=0.7
-)
-
+        # ✅ Corrected for openai>=1.0.0
+        response = openai.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": prompt}
+            ],
+            max_tokens=300,
+            temperature=0.7
+        )
 
         improved_email = response.choices[0].message.content.strip()
         client.chat_postMessage(channel=channel_id, text=improved_email)
