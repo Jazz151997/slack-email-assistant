@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
 openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.base_url = "https://api.openai.com/v1"
 
 @app.route("/slack/events", methods=["POST"])
 def handle_slack_event():
@@ -23,7 +24,6 @@ def handle_slack_event():
             f"{user_input}"
         )
 
-        # ✅ Corrected for openai>=1.0.0
         response = openai.chat.completions.create(
             model="gpt-4",
             messages=[
